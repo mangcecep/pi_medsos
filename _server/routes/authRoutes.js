@@ -26,7 +26,7 @@ module.exports = (app) => {
     ], auth_ctrl.login)
 
     router.post('/register', [
-        body('username').isLength({ min: 6, max: 20 }).isString().notEmpty().custom(async (value) => {
+        body('username').isLength({ min: 6, max: 20 }).withMessage("min 6 char").isString().notEmpty().custom(async (value) => {
             let userNameCheck = await user.findOne({
                 where: {
                     username: value
@@ -67,7 +67,7 @@ module.exports = (app) => {
                 throw new Error('gender is not registered!');
             }
         }),
-        body('major_id').isString().notEmpty().custom(async (value) => {
+        body('major_id').notEmpty().custom(async (value) => {
             const majorValue = await major.findByPk(value)
             if (!!majorValue == false) {
                 throw new Error('major id is not registered!');

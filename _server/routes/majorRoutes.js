@@ -8,7 +8,7 @@ module.exports = (app) => {
             attributes: ["id", "name"]
         })
 
-        return res.status(200).json({
+        res.status(200).json({
             message: 'major data founded!',
             data: majorData
         })
